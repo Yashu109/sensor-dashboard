@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding-top: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .card-title {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .card-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .sensor-value {
+            font-size: 28px;
+            font-weight: bold;
+            transition: color 0.5s ease;
+            margin: 10px 0;
+            background: -webkit-linear-gradient(45deg, #2c3e50, #4ca1af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .chart-container {
+            height: 400px;
+            margin-bottom: 30px;
+            padding: 15px;
+        }
+        .icon-container {
+            margin: 15px auto;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(240,240,240,0.5) 100%);
+            border-radius: 50%;
+            width: 70px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .icon-container svg {
+            transition: all 0.5s ease;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        .refresh-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .auto-refresh-toggle {
+            margin-top: 10px;
+        }
+        .last-updated {
+            text-align: center;
+            margin-bottom: 25px;
+            font-style: italic;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 15px rgba(79, 172, 254, 0.6);
+            background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+        }
+        .temperature-card .card-body {
+            background: linear-gradient(45deg, rgba(255,165,0,0.1) 0%, rgba(255,99,71,0.1) 100%);
+        }
+        .humidity-card .card-body {
+            background: linear-gradient(45deg, rgba(64,224,208,0.1) 0%, rgba(0,128,255,0.1) 100%);
+        }
+        .soil-card .card-body {
+            background: linear-gradient(45deg, rgba(139,69,19,0.1) 0%, rgba(34,139,34,0.1) 100%);
+        }
+        .nitrogen-card .card-body {
+            background: linear-gradient(45deg, rgba(144,238,144,0.1) 0%, rgba(0,128,0,0.1) 100%);
+        }
+        .phosphorus-card .card-body {
+            background: linear-gradient(45deg, rgba(255,182,193,0.1) 0%, rgba(219,112,147,0.1) 100%);
+        }
+        .potassium-card .card-body {
+            background: linear-gradient(45deg, rgba(221,160,221,0.1) 0%, rgba(148,0,211,0.1) 100%);
+        }
+        .dashboard-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .dashboard-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 2px;
+        }
+        .card-text {
+            color: #7f8c8d;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            vertical-align: middle;
+            border: 3px solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner-border .75s linear infinite;
+            margin-right: 5px;
+        }
+        .timer-display {
+            display: none;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            color: #7f8c8d;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .status-online {
+            background-color: #2ecc71;
+        }
+        .status-offline {
+            background-color: #e74c3c;
+        }
+        .status-loading {
+            background-color: #f39c12;
+        }
+        .form-switch {
+            padding-left: 2.5em;
+        }
+        .form-check-input:checked {
+            background-color: #4facfe;
+            border-color: #4facfe;
+        }
+        
+        /* Animation for updated values */
+        @keyframes highlight-update {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .updated {
+            animation: highlight-update 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="dashboard-title">Sensor Dashboard</h1>
+        
+        <div class="refresh-section">
+            <button id="refresh-data" class="btn btn-primary">
+                <i class="bi bi-arrow-repeat me-2"></i> Refresh Data
+            </button>
+            
+            <div class="auto-refresh-toggle form-check form-switch mt-3">
+                <input class="form-check-input" type="checkbox" id="auto-refresh-toggle" checked>
+                <label class="form-check-label" for="auto-refresh-toggle">Auto-refresh (30s)</label>
+            </div>
+            
+            <div id="timer-display" class="timer-display">
+                <span id="status-indicator" class="status-indicator status-loading"></span>
+                <span id="status-text">Loading...</span>
+                <span id="countdown-timer"></span>
+            </div>
+            
+            <p id="last-updated" class="last-updated">Last updated: --</p>
+        </div>
+        
+        <div class="row">
+            <!-- Temperature Card -->
+            <div class="col-md-4">
+                <div class="card temperature-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Temperature</h5>
+                        <div class="icon-container" id="temp-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2">
+                                <circle cx="12" cy="12" r="5" fill="orange"/>
+                                <line x1="12" y1="1" x2="12" y2="3"/>
+                                <line x1="12" y1="21" x2="12" y2="23"/>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                <line x1="1" y1="12" x2="3" y2="12"/>
+                                <line x1="21" y1="12" x2="23" y2="12"/>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                            </svg>
+                        </div>
+                        <p class="sensor-value" id="temperature-value">--</p>
+                        <p class="card-text">°C</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Humidity Card -->
+            <div class="col-md-4">
+                <div class="card humidity-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Humidity</h5>
+                        <div class="icon-container" id="humidity-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4da6ff" stroke-width="2">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="#4da6ff"/>
+                            </svg>
+                        </div>
+                        <p class="sensor-value" id="humidity-value">--</p>
+                        <p class="card-text">%</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Soil Moisture Card -->
+            <div class="col-md-4">
+                <div class="card soil-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Soil Moisture</h5>
+                        <div class="icon-container" id="soil-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8B4513" stroke-width="2">
+                                <path d="M8 16a4 4 0 0 0 8 0 7 7 0 0 0-8-8v8z" fill="#8B4513"/>
+                                <path d="M8 2v14" stroke="#33cc33"/>
+                                <path d="M12 2v14" stroke="#33cc33"/>
+                                <path d="M16 2v14" stroke="#33cc33"/>
+                            </svg>
+                        </div>
+                        <p class="sensor-value" id="soil-moisture-value">--</p>
+                        <p class="card-text">Level</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <!-- NPK Values -->
+            <div class="col-md-4">
+                <div class="card nitrogen-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Nitrogen (N)</h5>
+                        <div class="icon-container" id="nitrogen-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" fill="#ccffcc" />
+                                <text x="12" y="16" font-size="12" text-anchor="middle" fill="#006600" font-weight="bold">N</text>
+                            </svg>
+                        </div>
+                        <p class="sensor-value" id="nitrogen-value">--</p>
+                        <p class="card-text">mg/kg</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card phosphorus-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Phosphorus (P)</h5>
+                        <div class="icon-container" id="phosphorus-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" fill="#ffcccc" />
+                                <text x="12" y="16" font-size="12" text-anchor="middle" fill="#990000" font-weight="bold">P</text>
+                            </svg>
+                        </div>
+                        <p class="sensor-value" id="phosphorus-value">--</p>
+                        <p class="card-text">mg/kg</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card potassium-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Potassium (K)</h5>
+                        <div class="icon-container" id="potassium-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" fill="#e6ccff" />
+                                <text x="12" y="16" font-size="12" text-anchor="middle" fill="#660066" font-weight="bold">K</text>
+                            </svg>
+                        </div>
+                        <p class="sensor-value" id="potassium-value">--</p>
+                        <p class="card-text">mg/kg</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Historical Data</h5>
+                        <div class="chart-container" id="chart-container">
+                            <!-- Chart will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Google Sheets API details
+        const SHEET_ID = '1NIgsyjiusDReRxlgxFpGs9bPeHntQIW9V7sBQmAdJ9A';
+        
+        // Chart initialization
+        let myChart;
+        let sensorData = [];
+        let autoRefreshInterval = null;
+        let countdownInterval = null;
+        let lastRowCount = 0;
+        let refreshIntervalSeconds = 1;
+        let countdownSeconds = refreshIntervalSeconds;
+        
+        // Initialize dashboard on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize chart
+            initChart();
+            
+            // Load data on startup
+            fetchGoogleSheetsData();
+            
+            // Set up manual refresh button
+            document.getElementById('refresh-data').addEventListener('click', function() {
+                stopAutoRefresh();
+                fetchGoogleSheetsData();
+                if (document.getElementById('auto-refresh-toggle').checked) {
+                    startAutoRefresh();
+                }
+            });
+            
+            // Set up auto refresh toggle
+            document.getElementById('auto-refresh-toggle').addEventListener('change', function() {
+                if (this.checked) {
+                    startAutoRefresh();
+                } else {
+                    stopAutoRefresh();
+                    updateStatusIndicator('offline');
+                }
+            });
+            
+            // Start auto-refresh by default
+            startAutoRefresh();
+        });
+        
+        // Start auto refresh
+        function startAutoRefresh() {
+            stopAutoRefresh(); // Clear any existing intervals
+            
+            countdownSeconds = refreshIntervalSeconds;
+            updateCountdownDisplay();
+            
+            autoRefreshInterval = setInterval(fetchGoogleSheetsData, refreshIntervalSeconds * 1000);
+            
+            // Update countdown timer
+            countdownInterval = setInterval(function() {
+                countdownSeconds--;
+                updateCountdownDisplay();
+                if (countdownSeconds <= 0) {
+                    countdownSeconds = refreshIntervalSeconds;
+                }
+            }, 1000);
+            
+            updateStatusIndicator('online');
+        }
+        
+        // Stop auto refresh
+        function stopAutoRefresh() {
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+                autoRefreshInterval = null;
+            }
+            
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+        }
+        
+        // Update countdown display
+        function updateCountdownDisplay() {
+            const timerElement = document.getElementById('countdown-timer');
+            if (timerElement) {
+                timerElement.textContent = ` (next update in ${countdownSeconds}s)`;
+            }
+        }
+        
+        // Update status indicator
+        function updateStatusIndicator(status) {
+            const indicator = document.getElementById('status-indicator');
+            const statusText = document.getElementById('status-text');
+            
+            if (indicator && statusText) {
+                indicator.className = 'status-indicator';
+                
+                switch(status) {
+                    case 'online':
+                        indicator.classList.add('status-online');
+                        statusText.textContent = 'Auto-refresh active';
+                        break;
+                    case 'offline':
+                        indicator.classList.add('status-offline');
+                        statusText.textContent = 'Auto-refresh off';
+                        break;
+                    case 'loading':
+                        indicator.classList.add('status-loading');
+                        statusText.textContent = 'Fetching data...';
+                        break;
+                    default:
+                        indicator.classList.add('status-offline');
+                        statusText.textContent = 'Status unknown';
+                }
+            }
+        }
+        
+        // Fetch data from Google Sheets
+        function fetchGoogleSheetsData() {
+            updateStatusIndicator('loading');
+            
+            // Public access URL (doesn't require API key for published sheets)
+            const sheetUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
+            
+            fetch(sheetUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(csv => {
+                    // Parse CSV
+                    const rows = parseCSV(csv);
+                    
+                    // Check if we have new data
+                    if (rows.length !== lastRowCount) {
+                        lastRowCount = rows.length;
+                        processSheetData(rows);
+                    }
+                    
+                    // Update status
+                    if (document.getElementById('auto-refresh-toggle').checked) {
+                        updateStatusIndicator('online');
+                    } else {
+                        updateStatusIndicator('offline');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching Google Sheets data:', error);
+                    updateStatusIndicator('offline');
+                    alert('Error loading data. Please try again later.');
+                });
+        }
+        
+        // Simple CSV parser
+        function parseCSV(csv) {
+            const lines = csv.split('\n');
+            return lines.map(line => {
+                // Handle quoted fields properly
+                let fields = [];
+                let inQuote = false;
+                let field = '';
+                
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    
+                    if (char === '"') {
+                        inQuote = !inQuote;
+                    } else if (char === ',' && !inQuote) {
+                        fields.push(field);
+                        field = '';
+                    } else {
+                        field += char;
+                    }
+                }
+                
+                fields.push(field); // Add the last field
+                return fields;
+            });
+        }
+        
+        // Process the fetched data
+        function processSheetData(rows) {
+            // Clear previous data
+            sensorData = [];
+            
+            // Skip header row and process data rows
+            if (rows.length > 1) {
+                // Process data rows (newest first)
+                for (let i = rows.length - 1; i > 0; i--) {
+                    const row = rows[i];
+                    if (row.length < 8) continue; // Skip incomplete rows
+                    
+                    // Convert to appropriate data structure (adjusted index positions)
+                    const dataPoint = {
+                        timestamp: new Date(row[0]).getTime(),
+                        temperature: parseFloat(row[2]),
+                        humidity: parseFloat(row[3]),
+                        soil_moisture: parseFloat(row[4]),
+                        nitrogen: parseFloat(row[5]),
+                        phosphorus: parseFloat(row[6]),
+                        potassium: parseFloat(row[7])
+                    };
+                    
+                    // Add to dataset
+                    sensorData.push(dataPoint);
+                    
+                    // Update dashboard with the latest reading (newest row)
+                    if (i === rows.length - 1) {
+                        updateDashboard(dataPoint);
+                    }
+                }
+                
+                // Update chart with the latest 20 readings
+                updateChart(sensorData.slice(0, 20));
+                
+                // Update last refreshed time
+                document.getElementById('last-updated').textContent = 
+                    `Last updated: ${new Date().toLocaleString()}`;
+            }
+        }
+        
+        // Initialize the chart
+        function initChart() {
+            const ctx = document.createElement('canvas');
+            document.getElementById('chart-container').appendChild(ctx);
+            
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: 'Temperature (°C)',
+                            data: [],
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            tension: 0.4,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Humidity (%)',
+                            data: [],
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            tension: 0.4,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Soil Moisture',
+                            data: [],
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            tension: 0.4,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Nitrogen (mg/kg)',
+                            data: [],
+                            borderColor: 'rgba(40, 167, 69, 1)',
+                            backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        },
+                        {
+                            label: 'Phosphorus (mg/kg)',
+                            data: [],
+                            borderColor: 'rgba(220, 53, 69, 1)',
+                            backgroundColor: 'rgba(220, 53, 69, 0.2)',
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        },
+                        {
+                            label: 'Potassium (mg/kg)',
+                            data: [],
+                            borderColor: 'rgba(111, 66, 193, 1)',
+                            backgroundColor: 'rgba(111, 66, 193, 0.2)',
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Temperature, Humidity, Soil Moisture'
+                            },
+                            beginAtZero: true
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'NPK Values (mg/kg)'
+                            },
+                            beginAtZero: true,
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1000
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                            titleFont: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 13
+                            },
+                            padding: 10
+                        }
+                    },
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                }
+            });
+        }
+        
+        // Update the chart with new data
+        function updateChart(data) {
+            if (!myChart) return;
+            
+            // Reverse the data to display in chronological order
+            const chronologicalData = [...data].reverse();
+            
+            // Clear existing data
+            myChart.data.labels = [];
+            myChart.data.datasets.forEach(dataset => {
+                dataset.data = [];
+            });
+            
+            // Add new data in chronological order
+            chronologicalData.forEach(point => {
+                const timeLabel = formatTimestamp(point.timestamp).split(' ')[1]; // Just the time part
+                myChart.data.labels.push(timeLabel);
+                myChart.data.datasets[0].data.push(point.temperature);
+                myChart.data.datasets[1].data.push(point.humidity);
+                myChart.data.datasets[2].data.push(point.soil_moisture);
+                myChart.data.datasets[3].data.push(point.nitrogen);
+                myChart.data.datasets[4].data.push(point.phosphorus);
+                myChart.data.datasets[5].data.push(point.potassium);
+            });
+            
+            myChart.update();
+        }
+        
+        // Format timestamp for display
+        function formatTimestamp(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleString();
+        }
+        
+        // Update dashboard with the latest data
+        function updateDashboard(data) {
+            // Update temperature with visual feedback
+            const tempValue = document.getElementById('temperature-value');
+            tempValue.textContent = data.temperature.toFixed(1);
+            const tempIcon = document.querySelector('#temp-icon svg');
+            
+            // Change temperature icon based on value
+            if (data.temperature > 30) {
+                tempIcon.style.stroke = '#ff4500'; // Hot orange-red
+                tempIcon.querySelector('circle').setAttribute('fill', '#ff4500');
+                tempIcon.classList.add('pulse');
+            } else if (data.temperature > 20) {
+                tempIcon.style.stroke = 'orange';
+                tempIcon.querySelector('circle').setAttribute('fill', 'orange');
+                tempIcon.classList.remove('pulse');
+            } else {
+                tempIcon.style.stroke = '#3399ff'; // Cool blue
+                tempIcon.querySelector('circle').setAttribute('fill', '#3399ff');
+                tempIcon.classList.remove('pulse');
+            }
+            
+            // Update humidity with visual feedback
+            const humValue = document.getElementById('humidity-value');
+            humValue.textContent = data.humidity.toFixed(1);
+            const humIcon = document.querySelector('#humidity-icon svg');
+            
+            // Change humidity icon based on value
+            if (data.humidity > 80) {
+                humIcon.style.stroke = '#0066cc'; // Deep blue
+                humIcon.querySelector('path').setAttribute('fill', '#0066cc');
+            } else if (data.humidity > 40) {
+                humIcon.style.stroke = '#4da6ff'; // Medium blue
+                humIcon.querySelector('path').setAttribute('fill', '#4da6ff');
+            } else {
+                humIcon.style.stroke = '#99ccff'; // Light blue
+                humIcon.querySelector('path').setAttribute('fill', '#99ccff');
+            }
+            
+            // Update soil moisture with visual feedback
+            const soilValue = document.getElementById('soil-moisture-value');
+            soilValue.textContent = data.soil_moisture.toFixed(1);
+            const soilIcon = document.querySelector('#soil-icon svg');
+            
+            // Change soil moisture icon based on value
+            if (data.soil_moisture < 300) { // Very wet
+                soilIcon.querySelector('path').setAttribute('fill', '#006633'); // Dark green
+            } else if (data.soil_moisture < 500) { // Good moisture
+                soilIcon.querySelector('path').setAttribute('fill', '#8B4513'); // Medium brown
+            } else { // Dry
+                soilIcon.querySelector('path').setAttribute('fill', '#cc9966'); // Light brown
+                soilIcon.classList.add('pulse');
+            }
+            
+            // Update NPK values
+            document.getElementById('nitrogen-value').textContent = data.nitrogen.toFixed(1);
+            document.getElementById('phosphorus-value').textContent = data.phosphorus.toFixed(1);
+            document.getElementById('potassium-value').textContent = data.potassium.toFixed(1);
+            
+            // Add animation to highlight new values
+            animateValueUpdate(tempValue);
+            animateValueUpdate(humValue);
+            animateValueUpdate(soilValue);
+            animateValueUpdate(document.getElementById('nitrogen-value'));
+            animateValueUpdate(document.getElementById('phosphorus-value'));
+            animateValueUpdate(document.getElementById('potassium-value'));
+        }
+        
+        // Add a subtle animation to highlight value updates
+        function animateValueUpdate(element) {
+            element.classList.add('updated');
+            setTimeout(() => {
+                element.classList.remove('updated');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
