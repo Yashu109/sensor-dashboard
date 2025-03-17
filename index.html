@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,25 +15,30 @@
             background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         .container {
             max-width: 1200px;
         }
+
         .card {
             margin-bottom: 20px;
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             border: none;
             background: rgba(255, 255, 255, 0.9);
             overflow: hidden;
         }
+
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
+
         .card-body {
             padding: 1.5rem;
         }
+
         .card-title {
             color: #2c3e50;
             font-weight: 600;
@@ -40,6 +46,7 @@
             position: relative;
             padding-bottom: 0.5rem;
         }
+
         .card-title:after {
             content: '';
             position: absolute;
@@ -50,6 +57,7 @@
             height: 3px;
             background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
         }
+
         .sensor-value {
             font-size: 28px;
             font-weight: bold;
@@ -59,42 +67,61 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .chart-container {
             height: 400px;
             margin-bottom: 30px;
             padding: 15px;
         }
+
         .icon-container {
             margin: 15px auto;
             height: 70px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(240,240,240,0.5) 100%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(240, 240, 240, 0.5) 100%);
             border-radius: 50%;
             width: 70px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
+
         .icon-container svg {
             transition: all 0.5s ease;
         }
+
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
+
         .pulse {
             animation: pulse 2s infinite;
         }
+
         .refresh-section {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-bottom: 30px;
         }
+
         .auto-refresh-toggle {
             margin-top: 10px;
         }
+
         .last-updated {
             text-align: center;
             margin-bottom: 25px;
@@ -102,6 +129,7 @@
             color: #7f8c8d;
             font-weight: 500;
         }
+
         .btn-primary {
             background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
             border: none;
@@ -112,39 +140,65 @@
             letter-spacing: 0.5px;
             transition: all 0.3s ease;
         }
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 7px 15px rgba(79, 172, 254, 0.6);
             background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
         }
+
+        .btn-success {
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+            border: none;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 15px rgba(40, 167, 69, 0.6);
+            background: linear-gradient(90deg, #20c997 0%, #28a745 100%);
+        }
+
         .temperature-card .card-body {
-            background: linear-gradient(45deg, rgba(255,165,0,0.1) 0%, rgba(255,99,71,0.1) 100%);
+            background: linear-gradient(45deg, rgba(255, 165, 0, 0.1) 0%, rgba(255, 99, 71, 0.1) 100%);
         }
+
         .humidity-card .card-body {
-            background: linear-gradient(45deg, rgba(64,224,208,0.1) 0%, rgba(0,128,255,0.1) 100%);
+            background: linear-gradient(45deg, rgba(64, 224, 208, 0.1) 0%, rgba(0, 128, 255, 0.1) 100%);
         }
+
         .soil-card .card-body {
-            background: linear-gradient(45deg, rgba(139,69,19,0.1) 0%, rgba(34,139,34,0.1) 100%);
+            background: linear-gradient(45deg, rgba(139, 69, 19, 0.1) 0%, rgba(34, 139, 34, 0.1) 100%);
         }
+
         .nitrogen-card .card-body {
-            background: linear-gradient(45deg, rgba(144,238,144,0.1) 0%, rgba(0,128,0,0.1) 100%);
+            background: linear-gradient(45deg, rgba(144, 238, 144, 0.1) 0%, rgba(0, 128, 0, 0.1) 100%);
         }
+
         .phosphorus-card .card-body {
-            background: linear-gradient(45deg, rgba(255,182,193,0.1) 0%, rgba(219,112,147,0.1) 100%);
+            background: linear-gradient(45deg, rgba(255, 182, 193, 0.1) 0%, rgba(219, 112, 147, 0.1) 100%);
         }
+
         .potassium-card .card-body {
-            background: linear-gradient(45deg, rgba(221,160,221,0.1) 0%, rgba(148,0,211,0.1) 100%);
+            background: linear-gradient(45deg, rgba(221, 160, 221, 0.1) 0%, rgba(148, 0, 211, 0.1) 100%);
         }
+
         .dashboard-title {
             text-align: center;
             margin-bottom: 30px;
             color: #2c3e50;
             font-weight: 700;
             letter-spacing: 1px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
             position: relative;
             padding-bottom: 10px;
         }
+
         .dashboard-title:after {
             content: '';
             position: absolute;
@@ -156,11 +210,13 @@
             background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
             border-radius: 2px;
         }
+
         .card-text {
             color: #7f8c8d;
             font-weight: 500;
             font-size: 16px;
         }
+
         .loading-spinner {
             display: inline-block;
             width: 1em;
@@ -172,12 +228,14 @@
             animation: spinner-border .75s linear infinite;
             margin-right: 5px;
         }
+
         .timer-display {
             display: none;
             font-size: 0.9rem;
             margin-top: 10px;
             color: #7f8c8d;
         }
+
         .status-indicator {
             display: inline-block;
             width: 12px;
@@ -185,58 +243,141 @@
             border-radius: 50%;
             margin-right: 5px;
         }
+
         .status-online {
             background-color: #2ecc71;
         }
+
         .status-offline {
             background-color: #e74c3c;
         }
+
         .status-loading {
             background-color: #f39c12;
         }
+
         .form-switch {
             padding-left: 2.5em;
         }
+
         .form-check-input:checked {
             background-color: #4facfe;
             border-color: #4facfe;
         }
-        
+
         /* Animation for updated values */
         @keyframes highlight-update {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
-        
+
         .updated {
             animation: highlight-update 0.5s ease;
         }
+
+        /* Crop recommendation styles */
+        .section-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            color: #2c3e50;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .crop-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .crop-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .crop-card .card-header {
+            font-weight: 600;
+            background-color: rgba(240, 240, 240, 0.5);
+        }
+
+        .crop-card .compatibility-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .crop-recommendation-container {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 40px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .analysis-result {
+            border-left: 4px solid #4facfe;
+            padding-left: 15px;
+            margin: 15px 0;
+        }
+
+        .parameter-optimal {
+            color: #28a745;
+        }
+
+        .parameter-warning {
+            color: #ffc107;
+        }
+
+        .parameter-danger {
+            color: #dc3545;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .green {
+            color: #28a745;
+        }
+
+        .red {
+            color: #dc3545;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1 class="dashboard-title">Sensor Dashboard</h1>
-        
+
         <div class="refresh-section">
             <button id="refresh-data" class="btn btn-primary">
                 <i class="bi bi-arrow-repeat me-2"></i> Refresh Data
             </button>
-            
+
             <div class="auto-refresh-toggle form-check form-switch mt-3">
                 <input class="form-check-input" type="checkbox" id="auto-refresh-toggle" checked>
                 <label class="form-check-label" for="auto-refresh-toggle">Auto-refresh (30s)</label>
             </div>
-            
+
             <div id="timer-display" class="timer-display">
                 <span id="status-indicator" class="status-indicator status-loading"></span>
                 <span id="status-text">Loading...</span>
                 <span id="countdown-timer"></span>
             </div>
-            
+
             <p id="last-updated" class="last-updated">Last updated: --</p>
         </div>
-        
+
         <div class="row">
             <!-- Temperature Card -->
             <div class="col-md-4">
@@ -244,16 +385,17 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Temperature</h5>
                         <div class="icon-container" id="temp-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2">
-                                <circle cx="12" cy="12" r="5" fill="orange"/>
-                                <line x1="12" y1="1" x2="12" y2="3"/>
-                                <line x1="12" y1="21" x2="12" y2="23"/>
-                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                                <line x1="1" y1="12" x2="3" y2="12"/>
-                                <line x1="21" y1="12" x2="23" y2="12"/>
-                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                fill="none" stroke="orange" stroke-width="2">
+                                <circle cx="12" cy="12" r="5" fill="orange" />
+                                <line x1="12" y1="1" x2="12" y2="3" />
+                                <line x1="12" y1="21" x2="12" y2="23" />
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                                <line x1="1" y1="12" x2="3" y2="12" />
+                                <line x1="21" y1="12" x2="23" y2="12" />
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
                             </svg>
                         </div>
                         <p class="sensor-value" id="temperature-value">--</p>
@@ -261,15 +403,16 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Humidity Card -->
             <div class="col-md-4">
                 <div class="card humidity-card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Humidity</h5>
                         <div class="icon-container" id="humidity-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4da6ff" stroke-width="2">
-                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="#4da6ff"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                fill="none" stroke="#4da6ff" stroke-width="2">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="#4da6ff" />
                             </svg>
                         </div>
                         <p class="sensor-value" id="humidity-value">--</p>
@@ -277,18 +420,19 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Soil Moisture Card -->
             <div class="col-md-4">
                 <div class="card soil-card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Soil Moisture</h5>
                         <div class="icon-container" id="soil-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8B4513" stroke-width="2">
-                                <path d="M8 16a4 4 0 0 0 8 0 7 7 0 0 0-8-8v8z" fill="#8B4513"/>
-                                <path d="M8 2v14" stroke="#33cc33"/>
-                                <path d="M12 2v14" stroke="#33cc33"/>
-                                <path d="M16 2v14" stroke="#33cc33"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                fill="none" stroke="#8B4513" stroke-width="2">
+                                <path d="M8 16a4 4 0 0 0 8 0 7 7 0 0 0-8-8v8z" fill="#8B4513" />
+                                <path d="M8 2v14" stroke="#33cc33" />
+                                <path d="M12 2v14" stroke="#33cc33" />
+                                <path d="M16 2v14" stroke="#33cc33" />
                             </svg>
                         </div>
                         <p class="sensor-value" id="soil-moisture-value">--</p>
@@ -297,7 +441,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row mt-4">
             <!-- NPK Values -->
             <div class="col-md-4">
@@ -307,7 +451,8 @@
                         <div class="icon-container" id="nitrogen-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="10" fill="#ccffcc" />
-                                <text x="12" y="16" font-size="12" text-anchor="middle" fill="#006600" font-weight="bold">N</text>
+                                <text x="12" y="16" font-size="12" text-anchor="middle" fill="#006600"
+                                    font-weight="bold">N</text>
                             </svg>
                         </div>
                         <p class="sensor-value" id="nitrogen-value">--</p>
@@ -315,7 +460,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-4">
                 <div class="card phosphorus-card">
                     <div class="card-body text-center">
@@ -323,7 +468,8 @@
                         <div class="icon-container" id="phosphorus-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="10" fill="#ffcccc" />
-                                <text x="12" y="16" font-size="12" text-anchor="middle" fill="#990000" font-weight="bold">P</text>
+                                <text x="12" y="16" font-size="12" text-anchor="middle" fill="#990000"
+                                    font-weight="bold">P</text>
                             </svg>
                         </div>
                         <p class="sensor-value" id="phosphorus-value">--</p>
@@ -331,7 +477,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-4">
                 <div class="card potassium-card">
                     <div class="card-body text-center">
@@ -339,7 +485,8 @@
                         <div class="icon-container" id="potassium-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
                                 <circle cx="12" cy="12" r="10" fill="#e6ccff" />
-                                <text x="12" y="16" font-size="12" text-anchor="middle" fill="#660066" font-weight="bold">K</text>
+                                <text x="12" y="16" font-size="12" text-anchor="middle" fill="#660066"
+                                    font-weight="bold">K</text>
                             </svg>
                         </div>
                         <p class="sensor-value" id="potassium-value">--</p>
@@ -348,7 +495,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row mt-4">
             <div class="col-12">
                 <div class="card">
@@ -361,19 +508,84 @@
                 </div>
             </div>
         </div>
+
+        <!-- Crop Recommendation Section -->
+        <h2 class="section-title mt-5">Crop Recommendation System</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-3 mt-4">
+                    <div class="col-md-4">
+                        <label for="result-dropdown" class="form-label">Select Crop:</label>
+                        <select id="result-dropdown" class="form-select" onchange="enableAnalyzeButton()">
+                            <option value="">Select a crop</option>
+                            <option value="Tomato">Tomato</option>
+                            <option value="Onion">Onion</option>
+                            <option value="Chilli">Chilli</option>
+                            <option value="Brinjal">Brinjal</option>
+                            <option value="Watermelan">Watermelon</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="month-dropdown1" class="form-label">Growth Period (Months):</label>
+                        <select id="month-dropdown1" class="form-select">
+                            <option value="12">12 Months (Full Growth)</option>
+                            <option value="6">6 Months</option>
+                            <option value="3">3 Months</option>
+                            <option value="1">1 Month</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button id="analysis-button" class="btn btn-primary" onclick="updateResults()" disabled>
+                            <i class="bi bi-search me-2"></i>Analyze
+                        </button>
+                    </div>
+                </div>
+
+                <div id="result-table-container" class="hidden mt-4">
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        <span id="result-description">Analysis results for the selected crop based on current sensor
+                            readings.</span>
+                    </div>
+
+                    <h5 id="soil-type" class="mb-3"></h5>
+
+                    <div class="table-responsive">
+                        <table id="result-table" class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Recommended Range</th>
+                                    <th>Current Value</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div id="out-of-range-messages" class="mt-3"></div>
+                </div>
+
+                <!-- ML Recommendations will be shown here after clicking Analyze -->
+                <div id="ml-recommendation-results" class="mt-4" style="display: none;"></div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Chart.js for visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
+    <!-- TensorFlow.js for ML features -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
     <!-- Custom JavaScript -->
     <script>
         // Google Sheets API details
         const SHEET_ID = '1NIgsyjiusDReRxlgxFpGs9bPeHntQIW9V7sBQmAdJ9A';
-        
+
         // Chart initialization
         let myChart;
         let sensorData = [];
@@ -382,26 +594,26 @@
         let lastRowCount = 0;
         let refreshIntervalSeconds = 1;
         let countdownSeconds = refreshIntervalSeconds;
-        
+
         // Initialize dashboard on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Initialize chart
             initChart();
-            
+
             // Load data on startup
             fetchGoogleSheetsData();
-            
+
             // Set up manual refresh button
-            document.getElementById('refresh-data').addEventListener('click', function() {
+            document.getElementById('refresh-data').addEventListener('click', function () {
                 stopAutoRefresh();
                 fetchGoogleSheetsData();
                 if (document.getElementById('auto-refresh-toggle').checked) {
                     startAutoRefresh();
                 }
             });
-            
+
             // Set up auto refresh toggle
-            document.getElementById('auto-refresh-toggle').addEventListener('change', function() {
+            document.getElementById('auto-refresh-toggle').addEventListener('change', function () {
                 if (this.checked) {
                     startAutoRefresh();
                 } else {
@@ -409,45 +621,50 @@
                     updateStatusIndicator('offline');
                 }
             });
-            
+
             // Start auto-refresh by default
             startAutoRefresh();
+
+            // Initialize the ML Crop Recommendation model
+            setTimeout(() => {
+                cropRecommendationModel.init();
+            }, 1000);
         });
-        
+
         // Start auto refresh
         function startAutoRefresh() {
             stopAutoRefresh(); // Clear any existing intervals
-            
+
             countdownSeconds = refreshIntervalSeconds;
             updateCountdownDisplay();
-            
+
             autoRefreshInterval = setInterval(fetchGoogleSheetsData, refreshIntervalSeconds * 1000);
-            
+
             // Update countdown timer
-            countdownInterval = setInterval(function() {
+            countdownInterval = setInterval(function () {
                 countdownSeconds--;
                 updateCountdownDisplay();
                 if (countdownSeconds <= 0) {
                     countdownSeconds = refreshIntervalSeconds;
                 }
             }, 1000);
-            
+
             updateStatusIndicator('online');
         }
-        
+
         // Stop auto refresh
         function stopAutoRefresh() {
             if (autoRefreshInterval) {
                 clearInterval(autoRefreshInterval);
                 autoRefreshInterval = null;
             }
-            
+
             if (countdownInterval) {
                 clearInterval(countdownInterval);
                 countdownInterval = null;
             }
         }
-        
+
         // Update countdown display
         function updateCountdownDisplay() {
             const timerElement = document.getElementById('countdown-timer');
@@ -455,16 +672,16 @@
                 timerElement.textContent = ` (next update in ${countdownSeconds}s)`;
             }
         }
-        
+
         // Update status indicator
         function updateStatusIndicator(status) {
             const indicator = document.getElementById('status-indicator');
             const statusText = document.getElementById('status-text');
-            
+
             if (indicator && statusText) {
                 indicator.className = 'status-indicator';
-                
-                switch(status) {
+
+                switch (status) {
                     case 'online':
                         indicator.classList.add('status-online');
                         statusText.textContent = 'Auto-refresh active';
@@ -483,14 +700,14 @@
                 }
             }
         }
-        
+
         // Fetch data from Google Sheets
         function fetchGoogleSheetsData() {
             updateStatusIndicator('loading');
-            
+
             // Public access URL (doesn't require API key for published sheets)
             const sheetUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
-            
+
             fetch(sheetUrl)
                 .then(response => {
                     if (!response.ok) {
@@ -501,13 +718,13 @@
                 .then(csv => {
                     // Parse CSV
                     const rows = parseCSV(csv);
-                    
+
                     // Check if we have new data
                     if (rows.length !== lastRowCount) {
                         lastRowCount = rows.length;
                         processSheetData(rows);
                     }
-                    
+
                     // Update status
                     if (document.getElementById('auto-refresh-toggle').checked) {
                         updateStatusIndicator('online');
@@ -521,7 +738,7 @@
                     alert('Error loading data. Please try again later.');
                 });
         }
-        
+
         // Simple CSV parser
         function parseCSV(csv) {
             const lines = csv.split('\n');
@@ -530,10 +747,10 @@
                 let fields = [];
                 let inQuote = false;
                 let field = '';
-                
+
                 for (let i = 0; i < line.length; i++) {
                     const char = line[i];
-                    
+
                     if (char === '"') {
                         inQuote = !inQuote;
                     } else if (char === ',' && !inQuote) {
@@ -543,24 +760,24 @@
                         field += char;
                     }
                 }
-                
+
                 fields.push(field); // Add the last field
                 return fields;
             });
         }
-        
+
         // Process the fetched data
         function processSheetData(rows) {
             // Clear previous data
             sensorData = [];
-            
+
             // Skip header row and process data rows
             if (rows.length > 1) {
                 // Process data rows (newest first)
                 for (let i = rows.length - 1; i > 0; i--) {
                     const row = rows[i];
                     if (row.length < 8) continue; // Skip incomplete rows
-                    
+
                     // Convert to appropriate data structure (adjusted index positions)
                     const dataPoint = {
                         timestamp: new Date(row[0]).getTime(),
@@ -571,30 +788,30 @@
                         phosphorus: parseFloat(row[6]),
                         potassium: parseFloat(row[7])
                     };
-                    
+
                     // Add to dataset
                     sensorData.push(dataPoint);
-                    
+
                     // Update dashboard with the latest reading (newest row)
                     if (i === rows.length - 1) {
                         updateDashboard(dataPoint);
                     }
                 }
-                
+
                 // Update chart with the latest 20 readings
                 updateChart(sensorData.slice(0, 20));
-                
+
                 // Update last refreshed time
-                document.getElementById('last-updated').textContent = 
+                document.getElementById('last-updated').textContent =
                     `Last updated: ${new Date().toLocaleString()}`;
             }
         }
-        
+
         // Initialize the chart
         function initChart() {
             const ctx = document.createElement('canvas');
             document.getElementById('chart-container').appendChild(ctx);
-            
+
             myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -708,20 +925,20 @@
                 }
             });
         }
-        
+
         // Update the chart with new data
         function updateChart(data) {
             if (!myChart) return;
-            
+
             // Reverse the data to display in chronological order
             const chronologicalData = [...data].reverse();
-            
+
             // Clear existing data
             myChart.data.labels = [];
             myChart.data.datasets.forEach(dataset => {
                 dataset.data = [];
             });
-            
+
             // Add new data in chronological order
             chronologicalData.forEach(point => {
                 const timeLabel = formatTimestamp(point.timestamp).split(' ')[1]; // Just the time part
@@ -733,23 +950,23 @@
                 myChart.data.datasets[4].data.push(point.phosphorus);
                 myChart.data.datasets[5].data.push(point.potassium);
             });
-            
+
             myChart.update();
         }
-        
+
         // Format timestamp for display
         function formatTimestamp(timestamp) {
             const date = new Date(timestamp);
             return date.toLocaleString();
         }
-        
+
         // Update dashboard with the latest data
         function updateDashboard(data) {
             // Update temperature with visual feedback
             const tempValue = document.getElementById('temperature-value');
             tempValue.textContent = data.temperature.toFixed(1);
             const tempIcon = document.querySelector('#temp-icon svg');
-            
+
             // Change temperature icon based on value
             if (data.temperature > 30) {
                 tempIcon.style.stroke = '#ff4500'; // Hot orange-red
@@ -764,12 +981,12 @@
                 tempIcon.querySelector('circle').setAttribute('fill', '#3399ff');
                 tempIcon.classList.remove('pulse');
             }
-            
+
             // Update humidity with visual feedback
             const humValue = document.getElementById('humidity-value');
             humValue.textContent = data.humidity.toFixed(1);
             const humIcon = document.querySelector('#humidity-icon svg');
-            
+
             // Change humidity icon based on value
             if (data.humidity > 80) {
                 humIcon.style.stroke = '#0066cc'; // Deep blue
@@ -781,12 +998,12 @@
                 humIcon.style.stroke = '#99ccff'; // Light blue
                 humIcon.querySelector('path').setAttribute('fill', '#99ccff');
             }
-            
+
             // Update soil moisture with visual feedback
             const soilValue = document.getElementById('soil-moisture-value');
             soilValue.textContent = data.soil_moisture.toFixed(1);
             const soilIcon = document.querySelector('#soil-icon svg');
-            
+
             // Change soil moisture icon based on value
             if (data.soil_moisture < 300) { // Very wet
                 soilIcon.querySelector('path').setAttribute('fill', '#006633'); // Dark green
@@ -796,12 +1013,12 @@
                 soilIcon.querySelector('path').setAttribute('fill', '#cc9966'); // Light brown
                 soilIcon.classList.add('pulse');
             }
-            
+
             // Update NPK values
             document.getElementById('nitrogen-value').textContent = data.nitrogen.toFixed(1);
             document.getElementById('phosphorus-value').textContent = data.phosphorus.toFixed(1);
             document.getElementById('potassium-value').textContent = data.potassium.toFixed(1);
-            
+
             // Add animation to highlight new values
             animateValueUpdate(tempValue);
             animateValueUpdate(humValue);
@@ -810,7 +1027,7 @@
             animateValueUpdate(document.getElementById('phosphorus-value'));
             animateValueUpdate(document.getElementById('potassium-value'));
         }
-        
+
         // Add a subtle animation to highlight value updates
         function animateValueUpdate(element) {
             element.classList.add('updated');
@@ -818,6 +1035,1020 @@
                 element.classList.remove('updated');
             }, 1000);
         }
+
+        // ============= CROP RECOMMENDATION SYSTEM =============
+
+        // Define recorded ranges data for different crops
+        const recordedRanges = {
+            Tomato: {
+                temp: { min: 20, max: 25, unit: "°C" },
+                humidity: { min: 60, max: 70, unit: "%" },
+                h2o: { min: 2, max: 3, unit: "%" },
+                n: { min: 13, max: 14, unit: "%" },
+                p: { min: 17, max: 28, unit: "%" },
+                k: { min: 27, max: 38, unit: "%" },
+                ph: { min: 6.0, max: 6.8, unit: "" },
+                soil: "Red soil"
+            },
+            Onion: {
+                temp: { min: 18, max: 21, unit: "°C" },
+                humidity: { min: 85, max: 95, unit: "%" },
+                h2o: { min: 2, max: 3, unit: "%" },
+                n: { min: 0.33, max: 0.5, unit: "%" },
+                p: { min: 0.7, max: 0.8, unit: "%" },
+                k: { min: 0.7, max: 0.8, unit: "%" },
+                ph: { min: 5.0, max: 6.5, unit: "" },
+                soil: "Loamy soil"
+            },
+            Chilli: {
+                temp: { min: 20, max: 25, unit: "°C" },
+                humidity: { min: 50, max: 60, unit: "%" },
+                h2o: { min: 4, max: 5, unit: "%" },
+                n: { min: 0.4, max: 0.5, unit: "%" },
+                p: { min: 0.5, max: 0.8, unit: "%" },
+                k: { min: 0.5, max: 0.8, unit: "%" },
+                ph: { min: 6.0, max: 7.0, unit: "" },
+                soil: "Sandy loam"
+            },
+            Brinjal: {
+                temp: { min: 25, max: 35, unit: "°C" },
+                humidity: { min: 70, max: 85, unit: "%" },
+                h2o: { min: 4, max: 5, unit: "%" },
+                n: { min: 14, max: 15, unit: "%" },
+                p: { min: 25, max: 38, unit: "%" },
+                k: { min: 27, max: 28, unit: "%" },
+                ph: { min: 6.0, max: 7.0, unit: "" },
+                soil: "Sandy loam"
+            },
+            Watermelan: {
+                temp: { min: 15, max: 20, unit: "°C" },
+                humidity: { min: 30, max: 50, unit: "%" },
+                h2o: { min: 4, max: 5, unit: "%" },
+                n: { min: 24, max: 35, unit: "%" },
+                p: { min: 15, max: 28, unit: "%" },
+                k: { min: 15, max: 38, unit: "%" },
+                ph: { min: 6.0, max: 7.0, unit: "" },
+                soil: "Sandy loam"
+            },
+        };
+
+        // Variable to store update interval
+        let updateInterval;
+
+        // Adjust ranges based on selected months
+        function adjustRangesForMonths(ranges, monthFactor) {
+            Object.keys(ranges).forEach((param) => {
+                const range = ranges[param];
+                if (range.min && range.max) {
+                    range.min = (range.min * monthFactor).toFixed(2);
+                    range.max = (range.max * monthFactor).toFixed(2);
+                }
+            });
+            return ranges;
+        }
+
+        // Update recorded ranges based on month selection
+        function updateRecordedRanges() {
+            const selectedMonth = document.getElementById("month-dropdown1").value;
+            const selectedCrop = document.getElementById("result-dropdown").value;
+
+            if (!selectedMonth) {
+                console.log("Please select a month.");
+                alert("Please select a month.");
+                return;
+            }
+
+            if (!selectedCrop) {
+                console.log("Please select a crop.");
+                alert("Please select a crop.");
+                return;
+            }
+
+            const monthFactor = selectedMonth / 12;
+            if (recordedRanges[selectedCrop]) {
+                Object.keys(recordedRanges[selectedCrop]).forEach((param) => {
+                    const range = recordedRanges[selectedCrop][param];
+                    if (range.min !== undefined && range.max !== undefined) {
+                        range.min = Math.round(range.min * monthFactor);
+                        range.max = Math.round(range.max * monthFactor);
+                    }
+                });
+
+                console.log("Updated recorded ranges for " + selectedCrop + ":", recordedRanges[selectedCrop]);
+
+                const tableRows = document.querySelectorAll("#result-table tbody tr");
+                tableRows.forEach((row) => {
+                    const paramCell = row.querySelector("td:first-child");
+                    if (paramCell) {
+                        const paramName = paramCell.textContent.toLowerCase();
+                        if (recordedRanges[selectedCrop][paramName]) {
+                            const range = recordedRanges[selectedCrop][paramName];
+                            const recordedRangeCell = row.querySelector("td:nth-child(2)");
+                            if (recordedRangeCell) {
+                                recordedRangeCell.textContent = `${range.min} - ${range.max} ${range.unit}`;
+                            }
+                        }
+                    }
+                });
+            } else {
+                console.log("Invalid crop selection.");
+                alert("Invalid crop selection. Please try again.");
+            }
+        }
+
+        // Update crop analysis results
+        function updateResults() {
+            const selectedOption = document.getElementById("result-dropdown").value;
+
+            console.log("Selected crop:", selectedOption);
+
+            if (!selectedOption || !recordedRanges[selectedOption]) {
+                console.error("Invalid crop selected or crop data missing.");
+                document.getElementById("result-table-container").classList.add("hidden");
+                return;
+            }
+
+            const soilType = recordedRanges[selectedOption].soil;
+            document.getElementById("soil-type").textContent = `Recommended soil type: ${soilType}`;
+
+            if (updateInterval) clearInterval(updateInterval);
+
+            const updateData = () => {
+                // Get the latest sensor data point
+                let currentData = {};
+                if (sensorData.length > 0) {
+                    const latestData = sensorData[0];
+                    currentData = {
+                        temp: latestData.temperature,
+                        humidity: latestData.humidity,
+                        h2o: latestData.soil_moisture,
+                        n: latestData.nitrogen,
+                        p: latestData.phosphorus,
+                        k: latestData.potassium,
+                        ph: 6.5 // pH value isn't in the sensor data, using default
+                    };
+                } else {
+                    // Fallback to default values if no sensor data
+                    currentData = {
+                        temp: 22,
+                        humidity: 65,
+                        h2o: 2.5,
+                        n: 0.35,
+                        p: 0.75,
+                        k: 0.46,
+                        ph: 6.5
+                    };
+                }
+
+                const selectedMonths = parseInt(document.getElementById("month-dropdown1").value, 10) || 12;
+                const monthFactor = selectedMonths / 12;
+
+                const ranges = JSON.parse(JSON.stringify(recordedRanges[selectedOption]));
+                Object.keys(ranges).forEach((param) => {
+                    const range = ranges[param];
+                    if (range.min !== undefined && range.max !== undefined) {
+                        range.min = (parseFloat(range.min) * monthFactor).toFixed(1);
+                        range.max = (parseFloat(range.max) * monthFactor).toFixed(1);
+                    }
+                });
+
+                console.log("Ranges for selected crop:", ranges);
+
+                const tableBody = document.querySelector("#result-table tbody");
+                tableBody.innerHTML = "";
+
+                let outOfRangeMessages = [];
+
+                Object.keys(ranges).forEach((param) => {
+                    if (param === 'soil') return;
+                    const { min, max, unit } = ranges[param];
+                    const currentValue = currentData[param];
+                    const isInRange = currentValue >= min && currentValue <= max;
+
+                    if (!isInRange) {
+                        let message = '';
+                        if (currentValue < min) {
+                            message = `${param.toUpperCase()} is less than the minimum acceptable range (${min} ${unit}).`;
+                        } else {
+                            message = `${param.toUpperCase()} is more than the maximum acceptable range (${max} ${unit}).`;
+                        }
+                        outOfRangeMessages.push({
+                            message: message,
+                            action: `Adjust ${param} levels to be within ${min} - ${max} ${unit}.`
+                        });
+                    }
+
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${param.toUpperCase()}</td>
+                        <td>${min} - ${max} ${unit}</td>
+                        <td class="${isInRange ? "green" : "red"}">${currentValue.toFixed(1)} ${unit}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                const outOfRangeContainer = document.getElementById("out-of-range-messages");
+                outOfRangeContainer.innerHTML = '';
+
+                if (outOfRangeMessages.length > 0) {
+                    outOfRangeMessages.forEach(({ message, action }) => {
+                        const messageElement = document.createElement("div");
+                        messageElement.classList.add("alert", "alert-warning");
+                        messageElement.innerHTML = `
+                            <p><strong>${message}</strong></p>
+                            <p>Recommendation: ${action}</p>
+                        `;
+                        outOfRangeContainer.appendChild(messageElement);
+                    });
+                } else {
+                    const noIssuesMessage = document.createElement("div");
+                    noIssuesMessage.classList.add("alert", "alert-success");
+                    noIssuesMessage.innerHTML = "<p>All parameters are within the acceptable range.</p>";
+                    outOfRangeContainer.appendChild(noIssuesMessage);
+                }
+
+                document.getElementById("result-table-container").classList.remove("hidden");
+
+                // Generate ML rec  ommendations after showing the analysis results
+                cropRecommendationModel.generateMLRecommendations();
+            };
+
+            updateData();
+            updateInterval = setInterval(updateData, 5000); // Update every 5 seconds
+        }
+
+        // Enable Analyze button when a crop is selected
+        function enableAnalyzeButton() {
+            const selectedCrop = document.getElementById("result-dropdown").value;
+            const analyzeButton = document.getElementById("analysis-button");
+            analyzeButton.disabled = !selectedCrop;
+        }
+
+        // ML Crop Recommendation System (TensorFlow.js)
+        // ML Crop Recommendation System using Google Sheets data
+        // ML Crop Recommendation System using Google Sheets data
+        const cropRecommendationModel = {
+            model: null,
+            cropNames: ['Tomato', 'Onion', 'Chilli', 'Brinjal', 'Watermelan'],
+            trainingData: null, // Will store data from Google Sheets
+            isUsingDefaultData: true, // Flag to track if we're using default data
+
+            init: async function () {
+                console.log("Initializing ML crop recommendation model");
+                try {
+                    // Fetch historical data from Google Sheets for training
+                    await this.fetchTrainingData();
+                    await this.trainModel();
+                } catch (error) {
+                    console.error("Error during ML model initialization:", error);
+                    // Ensure we have a fallback model
+                    this.trainingData = this.useDefaultTrainingData();
+                    this.isUsingDefaultData = true;
+                    await this.trainModel();
+                }
+            },
+
+            fetchTrainingData: async function () {
+                console.log("Fetching training data from Google Sheets");
+
+                try {
+                    // Use the same Google Sheets URL that the dashboard uses
+                    const sheetUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
+
+                    const response = await fetch(sheetUrl);
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch Google Sheet data");
+                    }
+
+                    const csvText = await response.text();
+                    console.log("CSV data received, first 100 chars:", csvText.substring(0, 100));
+
+                    const rows = parseCSV(csvText);
+                    console.log("Parsed rows count:", rows.length);
+
+                    if (rows.length < 10) { // Need a reasonable amount of data
+                        console.warn("Not enough data for training, need at least 10 rows, got", rows.length);
+                        this.trainingData = this.useDefaultTrainingData();
+                        this.isUsingDefaultData = true;
+                        return;
+                    }
+
+                    // Process rows into training data format
+                    const processedData = this.processSheetData(rows);
+                    if (processedData.features.length < 5) {
+                        console.warn("Not enough processed data points, only got", processedData.features.length);
+                        this.trainingData = this.useDefaultTrainingData();
+                        this.isUsingDefaultData = true;
+                        return;
+                    }
+
+                    this.trainingData = processedData;
+                    this.isUsingDefaultData = false;
+                    console.log("Training data prepared with", processedData.features.length, "data points");
+
+                    // Debug: show what the first few training examples look like
+                    if (processedData.features.length > 0) {
+                        console.log("Sample training feature:", processedData.features[0]);
+                        console.log("Sample training label:", processedData.labels[0]);
+                    }
+                } catch (error) {
+                    console.error("Error fetching training data:", error);
+                    // Fallback to default data
+                    this.trainingData = this.useDefaultTrainingData();
+                    this.isUsingDefaultData = true;
+                }
+            },
+
+            // Process sheet data into training features and labels
+            processSheetData: function (rows) {
+                const features = [];
+                const labels = [];
+
+                // Skip header row (index 0)
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    if (row.length < 8) continue; // Skip incomplete rows
+
+                    try {
+                        // Extract values - ensure they're valid numbers
+                        const temp = parseFloat(row[2]);
+                        const humidity = parseFloat(row[3]);
+                        const soilMoisture = parseFloat(row[4]);
+                        const nitrogen = parseFloat(row[5]);
+                        const phosphorus = parseFloat(row[6]);
+                        const potassium = parseFloat(row[7]);
+                        const ph = 6.5; // Default pH
+
+                        // Skip if any value is NaN
+                        if (isNaN(temp) || isNaN(humidity) || isNaN(soilMoisture) ||
+                            isNaN(nitrogen) || isNaN(phosphorus) || isNaN(potassium)) {
+                            console.warn("Skipping row with invalid data:", row);
+                            continue;
+                        }
+
+                        // Find which crop this data matches best
+                        const bestCrop = this.findBestMatchingCrop({
+                            temp, humidity, h2o: soilMoisture,
+                            n: nitrogen, p: phosphorus, k: potassium, ph
+                        });
+
+                        if (bestCrop) {
+                            // Create feature array
+                            const feature = [temp, humidity, soilMoisture, nitrogen, phosphorus, potassium, ph];
+                            features.push(feature);
+
+                            // Create one-hot label
+                            const label = Array(this.cropNames.length).fill(0);
+                            const cropIndex = this.cropNames.indexOf(bestCrop);
+                            label[cropIndex] = 1;
+                            labels.push(label);
+                        }
+                    } catch (error) {
+                        console.error("Error processing row:", error, row);
+                    }
+                }
+
+                console.log(`Processed ${features.length} valid data points from ${rows.length - 1} rows`);
+
+                return {
+                    features: features,
+                    labels: labels
+                };
+            },
+
+            // Find which crop best matches the given sensor values
+            findBestMatchingCrop: function (sensorData) {
+                let bestMatch = null;
+                let bestScore = -1;
+
+                // Calculate a match score for each crop
+                for (const cropName of this.cropNames) {
+                    const cropRanges = recordedRanges[cropName];
+                    let score = 0;
+
+                    // Weighted scoring based on how close values are to ideal ranges
+                    // Temperature (high importance)
+                    if (sensorData.temp >= cropRanges.temp.min && sensorData.temp <= cropRanges.temp.max) {
+                        score += 30;
+                    } else {
+                        // Score based on proximity to range
+                        const tempDist = Math.min(
+                            Math.abs(sensorData.temp - cropRanges.temp.min),
+                            Math.abs(sensorData.temp - cropRanges.temp.max)
+                        );
+                        // The closer to range, the higher the score
+                        score += Math.max(0, 30 - (tempDist * 5));
+                    }
+
+                    // Humidity (medium importance)
+                    if (sensorData.humidity >= cropRanges.humidity.min && sensorData.humidity <= cropRanges.humidity.max) {
+                        score += 25;
+                    } else {
+                        const humDist = Math.min(
+                            Math.abs(sensorData.humidity - cropRanges.humidity.min),
+                            Math.abs(sensorData.humidity - cropRanges.humidity.max)
+                        );
+                        score += Math.max(0, 25 - (humDist * 2));
+                    }
+
+                    // Soil Moisture (medium importance)
+                    if (sensorData.h2o >= cropRanges.h2o.min && sensorData.h2o <= cropRanges.h2o.max) {
+                        score += 20;
+                    } else {
+                        const moistDist = Math.min(
+                            Math.abs(sensorData.h2o - cropRanges.h2o.min),
+                            Math.abs(sensorData.h2o - cropRanges.h2o.max)
+                        );
+                        score += Math.max(0, 20 - (moistDist * 4));
+                    }
+
+                    // NPK values (lower importance individually)
+                    if (sensorData.n >= cropRanges.n.min && sensorData.n <= cropRanges.n.max) {
+                        score += 15;
+                    } else {
+                        const nDist = Math.min(
+                            Math.abs(sensorData.n - cropRanges.n.min),
+                            Math.abs(sensorData.n - cropRanges.n.max)
+                        );
+                        score += Math.max(0, 15 - (nDist * 3));
+                    }
+
+                    if (sensorData.p >= cropRanges.p.min && sensorData.p <= cropRanges.p.max) {
+                        score += 15;
+                    } else {
+                        const pDist = Math.min(
+                            Math.abs(sensorData.p - cropRanges.p.min),
+                            Math.abs(sensorData.p - cropRanges.p.max)
+                        );
+                        score += Math.max(0, 15 - (pDist * 3));
+                    }
+
+                    if (sensorData.k >= cropRanges.k.min && sensorData.k <= cropRanges.k.max) {
+                        score += 15;
+                    } else {
+                        const kDist = Math.min(
+                            Math.abs(sensorData.k - cropRanges.k.min),
+                            Math.abs(sensorData.k - cropRanges.k.max)
+                        );
+                        score += Math.max(0, 15 - (kDist * 3));
+                    }
+
+                    // pH (medium importance)
+                    if (sensorData.ph >= cropRanges.ph.min && sensorData.ph <= cropRanges.ph.max) {
+                        score += 20;
+                    } else {
+                        const phDist = Math.min(
+                            Math.abs(sensorData.ph - cropRanges.ph.min),
+                            Math.abs(sensorData.ph - cropRanges.ph.max)
+                        );
+                        score += Math.max(0, 20 - (phDist * 10));
+                    }
+
+                    // Normalize score to 0-100
+                    const normalizedScore = (score / 140) * 100;
+
+                    // Update best match if this score is higher
+                    if (normalizedScore > bestScore) {
+                        bestScore = normalizedScore;
+                        bestMatch = cropName;
+                    }
+                }
+
+                // Only return a match if the score is reasonably good
+                return bestScore > 30 ? bestMatch : null;
+            },
+
+            useDefaultTrainingData: function () {
+                console.log("Using default training data");
+                // Create default training data with slight variations for robustness
+                const features = [];
+                const labels = [];
+
+                // Tomato data points (variations around ideal values)
+                for (let i = 0; i < 3; i++) {
+                    const temp = 22 + (Math.random() * 2 - 1);
+                    const humidity = 65 + (Math.random() * 10 - 5);
+                    const soilMoisture = 2.5 + (Math.random() * 0.5 - 0.25);
+                    const n = 0.35 + (Math.random() * 0.1 - 0.05);
+                    const p = 0.75 + (Math.random() * 0.1 - 0.05);
+                    const k = 0.46 + (Math.random() * 0.1 - 0.05);
+                    const ph = 6.5 + (Math.random() * 0.4 - 0.2);
+
+                    features.push([temp, humidity, soilMoisture, n, p, k, ph]);
+                    labels.push([1, 0, 0, 0, 0]);
+                }
+
+                // Onion data points
+                for (let i = 0; i < 3; i++) {
+                    const temp = 20 + (Math.random() * 2 - 1);
+                    const humidity = 90 + (Math.random() * 10 - 5);
+                    const soilMoisture = 2.5 + (Math.random() * 0.5 - 0.25);
+                    const n = 0.4 + (Math.random() * 0.1 - 0.05);
+                    const p = 0.7 + (Math.random() * 0.1 - 0.05);
+                    const k = 0.7 + (Math.random() * 0.1 - 0.05);
+                    const ph = 5.8 + (Math.random() * 0.4 - 0.2);
+
+                    features.push([temp, humidity, soilMoisture, n, p, k, ph]);
+                    labels.push([0, 1, 0, 0, 0]);
+                }
+
+                // Chilli data points
+                for (let i = 0; i < 3; i++) {
+                    const temp = 23 + (Math.random() * 2 - 1);
+                    const humidity = 55 + (Math.random() * 10 - 5);
+                    const soilMoisture = 4.5 + (Math.random() * 0.5 - 0.25);
+                    const n = 0.45 + (Math.random() * 0.1 - 0.05);
+                    const p = 0.65 + (Math.random() * 0.1 - 0.05);
+                    const k = 0.65 + (Math.random() * 0.1 - 0.05);
+                    const ph = 6.5 + (Math.random() * 0.4 - 0.2);
+
+                    features.push([temp, humidity, soilMoisture, n, p, k, ph]);
+                    labels.push([0, 0, 1, 0, 0]);
+                }
+
+                // Brinjal data points
+                for (let i = 0; i < 3; i++) {
+                    const temp = 30 + (Math.random() * 2 - 1);
+                    const humidity = 75 + (Math.random() * 10 - 5);
+                    const soilMoisture = 4.5 + (Math.random() * 0.5 - 0.25);
+                    const n = 14.5 + (Math.random() * 0.5 - 0.25);
+                    const p = 30 + (Math.random() * 2 - 1);
+                    const k = 28 + (Math.random() * 2 - 1);
+                    const ph = 6.5 + (Math.random() * 0.4 - 0.2);
+
+                    features.push([temp, humidity, soilMoisture, n, p, k, ph]);
+                    labels.push([0, 0, 0, 1, 0]);
+                }
+
+                // Watermelon data points
+                for (let i = 0; i < 3; i++) {
+                    const temp = 18 + (Math.random() * 2 - 1);
+                    const humidity = 40 + (Math.random() * 10 - 5);
+                    const soilMoisture = 4.5 + (Math.random() * 0.5 - 0.25);
+                    const n = 29 + (Math.random() * 2 - 1);
+                    const p = 22 + (Math.random() * 2 - 1);
+                    const k = 25 + (Math.random() * 2 - 1);
+                    const ph = 6.5 + (Math.random() * 0.4 - 0.2);
+
+                    features.push([temp, humidity, soilMoisture, n, p, k, ph]);
+                    labels.push([0, 0, 0, 0, 1]);
+                }
+
+                return {
+                    features: features,
+                    labels: labels
+                };
+            },
+
+            trainModel: async function () {
+                // Create model architecture
+                this.model = tf.sequential();
+                this.model.add(tf.layers.dense({
+                    units: 16,
+                    activation: 'relu',
+                    inputShape: [7],
+                    kernelInitializer: 'heNormal'
+                }));
+                this.model.add(tf.layers.dropout({ rate: 0.2 })); // Add dropout to prevent overfitting
+                this.model.add(tf.layers.dense({
+                    units: 8,
+                    activation: 'relu',
+                    kernelInitializer: 'heNormal'
+                }));
+                this.model.add(tf.layers.dense({
+                    units: 5,
+                    activation: 'softmax',
+                    kernelInitializer: 'glorotNormal'
+                }));
+
+                // Use Adam optimizer with a lower learning rate for stability
+                const optimizer = tf.train.adam(0.001);
+                this.model.compile({
+                    optimizer: optimizer,
+                    loss: 'categoricalCrossentropy',
+                    metrics: ['accuracy']
+                });
+
+                console.log("Training model...");
+
+                try {
+                    // Ensure we have training data
+                    if (!this.trainingData) {
+                        console.error("No training data available");
+                        this.trainingData = this.useDefaultTrainingData();
+                        this.isUsingDefaultData = true;
+                    }
+
+                    // Convert arrays to tensors
+                    const xs = tf.tensor2d(this.trainingData.features);
+                    const ys = tf.tensor2d(this.trainingData.labels);
+
+                    // Train the model with early stopping to prevent overfitting
+                    await this.model.fit(xs, ys, {
+                        epochs: 100,
+                        batchSize: 8,
+                        shuffle: true,
+                        validationSplit: 0.2,
+                        callbacks: {
+                            onEpochEnd: (epoch, logs) => {
+                                if (epoch % 10 === 0 || epoch === 99) {
+                                    console.log(`Epoch ${epoch + 1}: loss = ${logs.loss.toFixed(4)}, accuracy = ${logs.acc.toFixed(4)}`);
+                                }
+                            }
+                        }
+                    });
+
+                    console.log("Model trained successfully");
+
+                    // Clean up tensors
+                    xs.dispose();
+                    ys.dispose();
+                } catch (error) {
+                    console.error("Error during model training:", error);
+                    alert("There was an error training the ML model. Using default recommendations.");
+                }
+            },
+
+            generateMLRecommendations: function () {
+                const resultDiv = document.getElementById("ml-recommendation-results");
+                resultDiv.style.display = "block";
+                resultDiv.innerHTML = `
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Analyzing soil and environmental conditions with ML...</p>
+                </div>
+            </div>
+        `;
+
+                // Get current sensor data from the global sensorData array
+                let currentSensorData = {};
+
+                try {
+                    if (window.sensorData && window.sensorData.length > 0) {
+                        // Use latest sensor reading
+                        const latest = window.sensorData[0];
+                        console.log("Using latest sensor data:", latest);
+
+                        currentSensorData = {
+                            temp: latest.temperature,
+                            humidity: latest.humidity,
+                            h2o: latest.soil_moisture,
+                            n: latest.nitrogen,
+                            p: latest.phosphorus,
+                            k: latest.potassium,
+                            ph: 6.5 // Default pH since it's not in sensor data
+                        };
+                    } else {
+                        console.warn("No sensor data available, using default values");
+                        // Fallback to default values if no sensor data
+                        currentSensorData = {
+                            temp: 22,
+                            humidity: 65,
+                            h2o: 2.5,
+                            n: 0.35,
+                            p: 0.75,
+                            k: 0.46,
+                            ph: 6.5
+                        };
+                    }
+
+                    const recommendations = this.analyzeWithML(currentSensorData);
+                    this.displayMLRecommendations(recommendations, currentSensorData);
+                } catch (error) {
+                    console.error("Error generating ML recommendations:", error);
+                    resultDiv.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    Error generating ML recommendations. Please try again.
+                </div>
+            `;
+                }
+            },
+
+            analyzeWithML: function (sensorData) {
+                console.log("Analyzing with ML model, input data:", sensorData);
+
+                try {
+                    // Ensure model exists
+                    if (!this.model) {
+                        console.error("ML model not initialized");
+                        return this.fallbackRecommendations(sensorData);
+                    }
+
+                    // Prepare features array
+                    const features = [
+                        sensorData.temp,
+                        sensorData.humidity,
+                        sensorData.h2o,
+                        sensorData.n,
+                        sensorData.p,
+                        sensorData.k,
+                        sensorData.ph
+                    ];
+
+                    console.log("Using features:", features);
+
+                    // No need to normalize features since the model was trained on raw values
+                    const inputTensor = tf.tensor2d([features]);
+
+                    // Get prediction
+                    const prediction = this.model.predict(inputTensor);
+                    const probabilities = prediction.dataSync();
+
+                    console.log("Raw ML prediction:", Array.from(probabilities));
+
+                    // Clean up tensors
+                    inputTensor.dispose();
+                    prediction.dispose();
+
+                    // Map predictions to crop scores
+                    const cropScores = this.cropNames.map((name, i) => ({
+                        name,
+                        score: Math.round(probabilities[i] * 100)
+                    })).sort((a, b) => b.score - a.score);
+
+                    console.log("Crop scores:", cropScores);
+
+                    return this.generateRecommendations(cropScores, sensorData);
+                } catch (error) {
+                    console.error("Error in ML analysis:", error);
+                    return this.fallbackRecommendations(sensorData);
+                }
+            },
+
+            fallbackRecommendations: function (sensorData) {
+                console.log("Using fallback recommendation method");
+
+                // Generate recommendations based on direct matching with the recorded ranges
+                const cropScores = this.cropNames.map(cropName => {
+                    const ranges = recordedRanges[cropName];
+                    let score = 0;
+
+                    // Check each parameter against ideal ranges
+                    if (sensorData.temp >= ranges.temp.min && sensorData.temp <= ranges.temp.max) {
+                        score += 20;
+                    } else {
+                        const tempDiff = Math.min(
+                            Math.abs(sensorData.temp - ranges.temp.min),
+                            Math.abs(sensorData.temp - ranges.temp.max)
+                        );
+                        score += Math.max(0, 20 - (tempDiff * 2));
+                    }
+
+                    if (sensorData.humidity >= ranges.humidity.min && sensorData.humidity <= ranges.humidity.max) {
+                        score += 20;
+                    } else {
+                        const humDiff = Math.min(
+                            Math.abs(sensorData.humidity - ranges.humidity.min),
+                            Math.abs(sensorData.humidity - ranges.humidity.max)
+                        );
+                        score += Math.max(0, 20 - humDiff);
+                    }
+
+                    if (sensorData.h2o >= ranges.h2o.min && sensorData.h2o <= ranges.h2o.max) {
+                        score += 15;
+                    } else {
+                        const h2oDiff = Math.min(
+                            Math.abs(sensorData.h2o - ranges.h2o.min),
+                            Math.abs(sensorData.h2o - ranges.h2o.max)
+                        );
+                        score += Math.max(0, 15 - (h2oDiff * 3));
+                    }
+
+                    if (sensorData.n >= ranges.n.min && sensorData.n <= ranges.n.max) {
+                        score += 15;
+                    } else {
+                        const nDiff = Math.min(
+                            Math.abs(sensorData.n - ranges.n.min),
+                            Math.abs(sensorData.n - ranges.n.max)
+                        );
+                        score += Math.max(0, 15 - (nDiff * 5));
+                    }
+
+                    if (sensorData.p >= ranges.p.min && sensorData.p <= ranges.p.max) {
+                        score += 15;
+                    } else {
+                        const pDiff = Math.min(
+                            Math.abs(sensorData.p - ranges.p.min),
+                            Math.abs(sensorData.p - ranges.p.max)
+                        );
+                        score += Math.max(0, 15 - (pDiff * 5));
+                    }
+
+                    if (sensorData.k >= ranges.k.min && sensorData.k <= ranges.k.max) {
+                        score += 15;
+                    } else {
+                        const kDiff = Math.min(
+                            Math.abs(sensorData.k - ranges.k.min),
+                            Math.abs(sensorData.k - ranges.k.max)
+                        );
+                        score += Math.max(0, 15 - (kDiff * 5));
+                    }
+
+                    return {
+                        name: cropName,
+                        score: Math.min(100, Math.round(score))
+                    };
+                }).sort((a, b) => b.score - a.score);
+
+                return this.generateRecommendations(cropScores, sensorData);
+            },
+
+            generateRecommendations: function (sortedCrops, sensorData) {
+                const results = [];
+                sortedCrops.forEach(crop => {
+                    const recommendation = {
+                        name: crop.name,
+                        score: crop.score,
+                        rating: this.getScoreRating(crop.score),
+                        insights: []
+                    };
+                    const cropRanges = recordedRanges[crop.name];
+                    if (cropRanges) {
+                        // Add insights about temperature
+                        if (sensorData.temp < cropRanges.temp.min) {
+                            recommendation.insights.push({
+                                parameter: 'Temperature',
+                                message: `Current temperature (${sensorData.temp.toFixed(1)}°C) is below optimal range for ${crop.name} (${cropRanges.temp.min}-${cropRanges.temp.max}°C)`,
+                                positive: false
+                            });
+                        } else if (sensorData.temp > cropRanges.temp.max) {
+                            recommendation.insights.push({
+                                parameter: 'Temperature',
+                                message: `Current temperature (${sensorData.temp.toFixed(1)}°C) is above optimal range for ${crop.name} (${cropRanges.temp.min}-${cropRanges.temp.max}°C)`,
+                                positive: false
+                            });
+                        } else {
+                            recommendation.insights.push({
+                                parameter: 'Temperature',
+                                message: `Temperature (${sensorData.temp.toFixed(1)}°C) is within optimal range for ${crop.name}`,
+                                positive: true
+                            });
+                        }
+
+                        // Add insights about humidity
+                        if (sensorData.humidity < cropRanges.humidity.min) {
+                            recommendation.insights.push({
+                                parameter: 'Humidity',
+                                message: `Current humidity (${sensorData.humidity.toFixed(1)}%) is below optimal range for ${crop.name}`,
+                                positive: false
+                            });
+                        } else if (sensorData.humidity > cropRanges.humidity.max) {
+                            recommendation.insights.push({
+                                parameter: 'Humidity',
+                                message: `Current humidity (${sensorData.humidity.toFixed(1)}%) is above optimal range for ${crop.name}`,
+                                positive: false
+                            });
+                        } else {
+                            recommendation.insights.push({
+                                parameter: 'Humidity',
+                                message: `Humidity (${sensorData.humidity.toFixed(1)}%) is within optimal range for ${crop.name}`,
+                                positive: true
+                            });
+                        }
+
+                        // Add insights about pH
+                        if (sensorData.ph < cropRanges.ph.min) {
+                            recommendation.insights.push({
+                                parameter: 'pH',
+                                message: `Current pH (${sensorData.ph.toFixed(1)}) is below optimal range for ${crop.name}`,
+                                positive: false
+                            });
+                        } else if (sensorData.ph > cropRanges.ph.max) {
+                            recommendation.insights.push({
+                                parameter: 'pH',
+                                message: `Current pH (${sensorData.ph.toFixed(1)}) is above optimal range for ${crop.name}`,
+                                positive: false
+                            });
+                        } else {
+                            recommendation.insights.push({
+                                parameter: 'pH',
+                                message: `pH (${sensorData.ph.toFixed(1)}) is within optimal range for ${crop.name}`,
+                                positive: true
+                            });
+                        }
+
+                        // Add soil type recommendation
+                        if (cropRanges.soil) {
+                            recommendation.soilType = cropRanges.soil;
+                        }
+                    }
+
+                    // Keep only the most important insights
+                    recommendation.insights = recommendation.insights.slice(0, 3);
+
+                    results.push(recommendation);
+                });
+
+                return results;
+            },
+
+            getScoreRating: function (score) {
+                if (score >= 85) return { label: "Excellent", class: "success" };
+                if (score >= 70) return { label: "Good", class: "primary" };
+                if (score >= 50) return { label: "Fair", class: "warning" };
+                return { label: "Poor", class: "danger" };
+            },
+
+            displayMLRecommendations: function (recommendations, sensorData) {
+                const resultDiv = document.getElementById("ml-recommendation-results");
+                let html = `
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-robot me-2"></i>ML-Based Crop Recommendations</h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">Based on machine learning analysis of your current conditions, here are the most suitable crops:</p>
+                    <div class="current-conditions mb-4">
+                        <h6>Current Conditions:</h6>
+                        
+                    </div>
+                    <div class="row">
+        `;
+                recommendations.forEach(crop => {
+                    html += `
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 ${crop.score >= 70 ? 'border-success' : ''}">
+                        <div class="card-header bg-light"><h5 class="mb-0">${crop.name}</h5></div>
+                        <div class="card-body">
+                            <div class="text-center mb-3">
+                                <div class="position-relative d-inline-block">
+                                    <svg width="120" height="120" viewBox="0 0 120 120">
+                                        <circle cx="60" cy="60" r="54" fill="none" stroke="#e9ecef" stroke-width="12" />
+                                        <circle cx="60" cy="60" r="54" fill="none" stroke="${this.getScoreColor(crop.score)}" 
+                                            stroke-width="12" stroke-dasharray="${Math.round(crop.score * 3.39)}, 339" transform="rotate(-90 60 60)" />
+                                    </svg>
+                                    <div class="position-absolute" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                        <h2 class="mb-0">${crop.score}</h2>
+                                        <div class="small">Compatibility</div>
+                                    </div>
+                                </div>
+                                <div class="mt-2"><span class="badge bg-${crop.rating.class}">${crop.rating.label} Match</span></div>
+                            </div>
+                            <h6>ML Insights:</h6>
+                            <ul class="list-group mb-3">
+            `;
+                    crop.insights.forEach(insight => {
+                        html += `
+                    <li class="list-group-item ${insight.positive ? 'list-group-item-success' : 'list-group-item-warning'}">
+                        <i class="bi bi-${insight.positive ? 'check-circle' : 'exclamation-triangle'} me-2"></i>
+                        ${insight.message}
+                    </li>
+                `;
+                    });
+                    if (crop.soilType) {
+                        html += `
+                    <li class="list-group-item list-group-item-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Recommended soil: ${crop.soilType}
+                    </li>
+                `;
+                    }
+                    html += `
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+                });
+
+                // Add note about data source
+                const dataSourceNote = this.isUsingDefaultData ?
+                    "This ML model is currently using default training data. As you collect more sensor data, the model will learn from your specific conditions." :
+                    "This ML model was trained using your historical sensor data from Google Sheets.";
+
+                html += `
+                    </div>
+                    <p class="text-muted"><small><i class="bi bi-info-circle me-1"></i>${dataSourceNote}</small></p>
+                </div>
+            </div>
+        `;
+                resultDiv.innerHTML = html;
+
+                document.querySelectorAll('.select-crop').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const cropName = button.getAttribute('data-crop');
+                        const cropDropdown = document.getElementById('result-dropdown');
+                        if (cropDropdown) {
+                            cropDropdown.value = cropName;
+                            const analysisButton = document.getElementById('analysis-button');
+                            if (analysisButton) analysisButton.click();
+                        }
+                    });
+                });
+            },
+
+            getScoreColor: function (score) {
+                if (score >= 85) return "#28a745";
+                if (score >= 70) return "#007bff";
+                if (score >= 50) return "#ffc107";
+                return "#dc3545";
+            }
+        };
     </script>
 </body>
+
 </html>
